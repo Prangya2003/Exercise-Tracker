@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import ExerciseForm from "./components/ExerciseForm";
+import ExerciseList from "./components/ExerciseList";
 
 function App() {
+  const [exercises, setExercises] = useState(() => {
+    const stored = localStorage.getItem("exercises");
+    return stored ? JSON.parse(stored) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("exercises", JSON.stringify(exercises));
+  }, [exercises]);
+
+  const addExercise = (exercise) => {
+    setExercises([exercise, ...exercises]);
+  };
+
+  const deleteExercise = (id) => {
+    setExercises(exercises.filter((e) => e.id !== id));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>🏋️ Exercise Tracker</h1>
+      <ExerciseForm onAdd={addExercise} />
+      <ExerciseList exercises={exercises} onDelete={deleteExercise} />
     </div>
   );
 }
