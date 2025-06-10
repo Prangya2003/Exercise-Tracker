@@ -8,13 +8,12 @@ function ExerciseForm({ onAdd }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !reps || !date) return;
-    const newExercise = {
+    onAdd({
       id: Date.now(),
       name,
       reps: parseInt(reps),
-      date
-    };
-    onAdd(newExercise);
+      date,
+    });
     setName("");
     setReps("");
     setDate("");
@@ -39,7 +38,7 @@ function ExerciseForm({ onAdd }) {
         value={date}
         onChange={(e) => setDate(e.target.value)}
       />
-      <button type="submit">Add Exercise</button>
+      <button type="submit">Add</button>
     </form>
   );
 }
