@@ -36,9 +36,9 @@ function ExerciseItem({ exercise, onDelete, onUpdate }) {
             {exercise.date}
           </div>
           <div>
-            <button onClick={() => setEditing(true)}>✏️</button> 
+            <button onClick={() => setEditing(true)}><i class="fa-solid fa-pen"></i></button> 
 
-            <button onClick={() => onDelete(exercise.id)}>❌</button>
+            <button onClick={() => onDelete(exercise.id)}><i class="fa-solid fa-xmark"></i></button>
           </div>
         </>
       )}
